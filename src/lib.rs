@@ -1,6 +1,6 @@
-enum Node<'a,T> {
+pub enum Node<'a,T> {
     Leaf,
-    Branch(&'a Node<'a,T>,T),
+    Branch(T,&'a Node<'a,T>,&'a Node<'a,T>),
 }
 
 //fn id<'a>(tree :&'a Node) -> &Node<'a> {
@@ -8,6 +8,7 @@ enum Node<'a,T> {
 //}
 
 // For branch I have used tupple, could have used named fields (as only 2 parameters and very simple example, I prefer tupple)
+// Creating the recursive datastruture, first surprise is the lifetime anotations 
 // Lifetime cycle https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html 'a
 #[cfg(test)]
 mod tests {

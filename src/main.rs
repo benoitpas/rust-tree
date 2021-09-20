@@ -7,7 +7,9 @@ fn main() {
     let nc = Node::<char>::Branch('c',&nd,&ne);
     let nb = Node::<char>::Branch('b',&leaf,&leaf);
     let na = Node::<char>::Branch('c',&nb,&nc);
-    println!("Hello, world!")
+    println!("{}", rust_tree::to_string(&na))
+
+    // general remark -> very clear and helpful error messages
 
     //one of the conclusions:
     //* rust takes some of the most accepted useful features of functional languages (like immutability, lambdas,algebraic data tyoes and pattern matching ), 

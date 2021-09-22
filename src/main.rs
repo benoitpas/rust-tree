@@ -2,12 +2,12 @@ use rust_tree::Node;
 
 fn main() {
     let leaf = Node::Leaf; //mention int types including isize
-    let nd = Node::Branch(&'d',&leaf,&leaf); //explicit reference passing
-    let ne = Node::Branch(&'e',&leaf,&leaf); // I do like in Scala no having to bother with ';'
-    let nc = Node::Branch(&'c',&nd,&ne);
-    let nb = Node::Branch(&'b',&leaf,&leaf);
-    let na = Node::Branch(&'c',&nb,&nc);
-    println!("{}", na.to_string())
+    let nd = Node::Branch('d',&leaf,&leaf); //explicit reference passing
+    let ne = Node::Branch('e',&leaf,&leaf); // I do like in Scala no having to bother with ';'
+    let nc = Node::Branch('c',&nd,&ne);
+    let nb = Node::Branch('b',&leaf,&leaf);
+    let na = Node::Branch('c',&nb,&nc);
+    println!("{:?}", na)
 
     // general remark -> very clear and helpful error messages
 

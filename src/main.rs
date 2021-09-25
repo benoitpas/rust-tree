@@ -1,13 +1,18 @@
 use rust_tree::Node;
+use rust_tree::add_id;
+use std::rc::Rc;
 
 fn main() {
-    let leaf = Node::Leaf; //mention int types including isize
-    let nd = Node::Branch('d',&leaf,&leaf); //explicit reference passing
-    let ne = Node::Branch('e',&leaf,&leaf); // I do like in Scala no having to bother with ';'
-    let nc = Node::Branch('c',&nd,&ne);
-    let nb = Node::Branch('b',&leaf,&leaf);
-    let na = Node::Branch('c',&nb,&nc);
-    println!("{:?}", na)
+    let leaf = Rc::new(Node::Leaf); //mention int types including isize
+    let nd = Rc::new(Node::Branch(Rc::new('d'),Rc::clone(&leaf),Rc::clone(&leaf))); //explicit reference passing + clone
+    let ne = Rc::new(Node::Branch(Rc::new('e'),Rc::clone(&leaf),Rc::clone(&leaf))); // I do like in Scala no having to bother with ';'
+    let nb = Rc::new(Node::Branch(Rc::new('b'),Rc::clone(&leaf),Rc::clone(&leaf)));
+    let nc = Rc::new(Node::Branch(Rc::new('c'),nd,ne)); //no need for clone here as only 1 usage (let removed)
+    let na = Rc::new(Node::Branch(Rc::new('a'),nb,nc));
+    println!("{:?}", na);
+
+    let nai = add_id(na,0);
+    println!("{:?}", nai);
 
     // general remark -> very clear and helpful error messages
 

@@ -6,8 +6,9 @@ pub enum Node<T> {
     Branch(Rc<T>, Rc<Node<T>>, Rc<Node<T>>) 
 }
 
+//mention int types including isize
 pub fn add_id<T> (tree: Rc<Node<T>>, i: isize ) -> (Rc<Node<(Rc<T>, isize)>>,isize) {
-    match &*tree { // explain &*
+    match &*tree { // explain &*: tree of type Rc<Node<T>>, *tree of type Node<T>, then borrow the value with &*tree
         Node::Leaf => (Rc::new(Node::Leaf), i),
         Node::Branch(value, left, right) => {
             let new_left = add_id(Rc::clone(left),i);
@@ -17,11 +18,16 @@ pub fn add_id<T> (tree: Rc<Node<T>>, i: isize ) -> (Rc<Node<(Rc<T>, isize)>>,isi
     }
 }
 
-//pub fn add_refCount<T> () (tree: Rc<Node<T>>) -> (Rc<Node<T,isize>>) {
-//    match &*tree {
-//
-//   }
-//}
+pub fn add_ref_count<T:std::fmt::Debug>(tree: Rc<Node<T>>) -> String {
+    let s = match &*tree {
+        Node::Leaf => "".to_string(),
+        Node::Branch(value, left, right) => format!("([{:?},{:?}],{:?},{:?})", 
+            value, Rc::strong_count(value), 
+            add_ref_count(Rc::clone(&left)),
+            add_ref_count(Rc::clone(&right)))
+   };
+   s.replace("\"","")
+}
 
 
 // For branch I have used tupple, could have used named fields (as only 2 parameters and very simple example, I prefer tupple)

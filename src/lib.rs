@@ -25,7 +25,7 @@ impl<T: PartialEq> PartialEq for Node<T> {
 
 //mention int types including isize
 pub fn add_id<T> (tree: Rc<Node<T>>, i: isize ) -> (Rc<Node<(Rc<T>, isize)>>, isize) {
-    match tree { // explain &*: tree of type Rc<Node<T>>, *tree of type Node<T>, then borrow the value with &*tree
+    match &*tree { // explain &*: tree of type Rc<Node<T>>, *tree of type Node<T>, then borrow the value with &*tree
         Node::Leaf => (Rc::new(Node::Leaf), i),
         Node::Branch(value, left, right) => {
             let new_left = add_id(Rc::clone(left), i);

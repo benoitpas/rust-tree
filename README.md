@@ -1,4 +1,5 @@
 # rust-tree
 [![Build Status](https://travis-ci.com/benoitpas/rust-tree.svg?branch=main)](https://app.travis-ci.com/github/benoitpas/rust-tree)
 
-This little program was written to test rust and write a blog entry on the experience
+Project created to test rust with one of my pet algorithms, the implementation was used to write the blog post [Rusty Tree](http
+s://benoitpas.github.io/Rust/).
